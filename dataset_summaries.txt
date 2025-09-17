@@ -1,0 +1,199 @@
+HEALTHCARE DATASETS ANALYSIS REPORT
+==================================================
+Generated on: 2025-09-16 14:57:46
+Total datasets analyzed: 10
+
+📊 Patient.csv
+   Records: 50,000
+   Columns: 21
+   Fields: person_id, mrn, nhs_number, first_name, surname, title, date_of_birth, date_of_death, sex, phone_number, registered_gp, next_of_kin_name, next_of_kin_number, postcode, address_line_1, address_line_2, address_city, contact_preferences, interpreter_required, is_carer_support_available, preferred_spoken_language
+
+   DATASET DESCRIPTION:
+   • Contains patient demographic and contact information
+   • Includes NHS numbers, names, addresses, and GP registration details
+   • Age range data available for 50000 patients
+
+   MISSING DATA:
+   • date_of_death: 45030 (90.1%)
+   • next_of_kin_name: 11 (0.0%)
+   • next_of_kin_number: 11 (0.0%)
+   • postcode: 11 (0.0%)
+   • address_line_1: 11 (0.0%)
+   • address_line_2: 11 (0.0%)
+   • address_city: 11 (0.0%)
+   • contact_preferences: 14483 (29.0%)
+   • interpreter_required: 44923 (89.8%)
+   • is_carer_support_available: 46433 (92.9%)
+   • preferred_spoken_language: 5077 (10.2%)
+
+--------------------------------------------------
+
+📊 GP Registration.csv
+   Records: 50,401
+   Columns: 24
+   Fields: registration_id, patient_id, general_medical_practice, registration_start_date, registration_end_date, named_general_practitioner_first_name, named_general_practitioner_last_name, named_general_practitioner_id, general_medical_practice_id, icb_organisation_id, sub_icb_location_organisation_id, is_latest_registration, named_general_practitioner_ppd_code, general_medical_practice_ods_code, address, Organisation_Code, National_Grouping, High_Level_Health_Geography, Address_Line_1, Address_Line_2, Address_Line_3, Address_Line_4, Address_Line_5, Postcode
+
+   DATASET DESCRIPTION:
+   • Patient registration data with GP practices
+
+   MISSING DATA:
+   • registration_end_date: 49182 (97.6%)
+   • National_Grouping: 2144 (4.3%)
+   • High_Level_Health_Geography: 2144 (4.3%)
+   • Address_Line_2: 15553 (30.9%)
+   • Address_Line_3: 42198 (83.7%)
+   • Address_Line_5: 50401 (100.0%)
+
+--------------------------------------------------
+
+📊 GP Appointment.csv
+   Records: 500,000
+   Columns: 20
+   Fields: Appointment_Name, case, attendance_id, patient_id, is_first_appointment, start_date_time, end_date_time, booking_status, clinic_id, date_time_booked, date_time_cancelled, cancellation_reason, outcome, category, referral_id, code, priority, pathway_id, clinic_type_name, specialty_id
+
+   DATASET DESCRIPTION:
+   • Healthcare appointment scheduling and attendance data
+   • Tracks booking status, cancellations, and outcomes
+   • Appointment statuses: {'Attended': np.int64(224684), 'Booked': np.int64(100462), 'Waiting': np.int64(99749), 'Cancelled': np.int64(50076), 'Checked In': np.int64(25029)}
+
+   MISSING DATA:
+   • date_time_cancelled: 449924 (90.0%)
+   • cancellation_reason: 449924 (90.0%)
+   • outcome: 49782 (10.0%)
+
+--------------------------------------------------
+
+📊 Care Professional.csv
+   Records: 1,000
+   Columns: 7
+   Fields: role, care_professional_local_id, name, is_active, care_professional_id, professional_registration_body_code, professional_registration_entry_id
+
+   DATASET DESCRIPTION:
+   • Healthcare staff and professional information
+   • Lists GPs, nurses, and other care providers
+   • Professional roles: {'GP': np.int64(600), 'Nurse': np.int64(400)}
+
+   MISSING DATA:
+   • professional_registration_body_code: 1000 (100.0%)
+   • professional_registration_entry_id: 1000 (100.0%)
+
+--------------------------------------------------
+
+📊 ONS GP Survey.csv
+   Records: 5,005
+   Columns: 11
+   Fields: Wave, Question_ID, Demographic_category, Demographic_breakdown, Response_option, Number_of_responses, untitled_column, LCL, UCL, Question, primary_key
+
+   DATASET DESCRIPTION:
+   • Office for National Statistics GP patient survey data
+   • Contains patient satisfaction and experience metrics
+   • Includes response rates and confidence intervals
+
+--------------------------------------------------
+
+📊 GP Practices.csv
+   Records: 109,231
+   Columns: 15
+   Fields: index, address, Organisation_Code, National_Grouping, High_Level_Health_Geography, Address_Line_1, Address_Line_2, Address_Line_3, Address_Line_4, Address_Line_5, Postcode, Open_Date, Close_Date, Status, Contact_Telephone_Number
+
+   DATASET DESCRIPTION:
+   • GP practice locations and organizational information
+   • Contains practice addresses, codes, and contact details
+   • 109231 active practices out of 109231 total
+
+   MISSING DATA:
+   • National_Grouping: 5486 (5.0%)
+   • High_Level_Health_Geography: 5486 (5.0%)
+   • Address_Line_2: 37404 (34.2%)
+   • Address_Line_3: 93051 (85.2%)
+   • Address_Line_5: 109231 (100.0%)
+   • Close_Date: 109231 (100.0%)
+   • Contact_Telephone_Number: 544 (0.5%)
+
+--------------------------------------------------
+
+📊 ONS GP Survey Demographics.csv
+   Records: 77
+   Columns: 4
+   Fields: Demographic_category, Demographic_breakdown, Number_of_respondents, Title
+
+   DATASET DESCRIPTION:
+   • Office for National Statistics GP patient survey data
+   • Contains patient satisfaction and experience metrics
+
+--------------------------------------------------
+
+📊 GP Clinics.csv
+   Records: 25,000
+   Columns: 20
+   Fields: Clinic_Care_Professional, clinic_name, clinic_type_name, clinic_id, clinic_start_timestamp, clinic_end_timestamp, location, site_id, total_slots, total_vacant_slots_new, total_vacant_slots_followup, care_professional_id, room_id, clinic_code, status, clinic_type_id, status_reason, clinic_type_active, cancellation_timestamp, cancellation_reason
+
+   DATASET DESCRIPTION:
+   • GP clinic and facility information
+
+   MISSING DATA:
+   • care_professional_id: 2698 (10.8%)
+   • status: 14916 (59.7%)
+   • status_reason: 22350 (89.4%)
+   • cancellation_timestamp: 22350 (89.4%)
+   • cancellation_reason: 22350 (89.4%)
+
+--------------------------------------------------
+
+📊 GP Request.csv
+   Records: 13,751
+   Columns: 41
+   Fields: new_referral_notes, referral_id, pathway_id, patient_id, source_unique_id, source, site_id, requested_appointment_type, date_referral_received, date_referral_accepted, earliest_due_date, due_date, status, priority, patient_is_on_cancer_pathway, rtt_pathway_status, rtt_period_length, referral_source, date_referral_created, ubrn, referrer_id, specialty_id, primary_care_professional_id, removed_timestamp, rtt_period_start_date, rtt_period_end_date, service_id, priority_code, priority_local_code, referral_source_code, referral_source_local_code, referring_organisation, referring_organisation_ods_code, service_type_requested_code, service_type_requested_local_code, treatment_function_code, treatment_function_local_code, was_patient_referred_to_direct_access_service, was_referred_by_first_contact_practitioner, referral_letter_rid, referral_letter_content
+
+   DATASET DESCRIPTION:
+   • GP service requests and referrals
+
+   MISSING DATA:
+   • patient_is_on_cancer_pathway: 4709 (34.2%)
+   • rtt_pathway_status: 3751 (27.3%)
+   • rtt_period_length: 3751 (27.3%)
+   • ubrn: 3751 (27.3%)
+   • referrer_id: 13751 (100.0%)
+   • primary_care_professional_id: 1196 (8.7%)
+   • removed_timestamp: 8823 (64.2%)
+   • rtt_period_start_date: 9732 (70.8%)
+   • rtt_period_end_date: 12750 (92.7%)
+   • service_id: 11765 (85.6%)
+   • priority_code: 13751 (100.0%)
+   • priority_local_code: 13751 (100.0%)
+   • referral_source_code: 13751 (100.0%)
+   • referral_source_local_code: 13751 (100.0%)
+   • referring_organisation: 13751 (100.0%)
+   • referring_organisation_ods_code: 13751 (100.0%)
+   • service_type_requested_code: 13751 (100.0%)
+   • service_type_requested_local_code: 13751 (100.0%)
+   • treatment_function_code: 13751 (100.0%)
+   • treatment_function_local_code: 13751 (100.0%)
+   • was_patient_referred_to_direct_access_service: 13751 (100.0%)
+   • was_referred_by_first_contact_practitioner: 13751 (100.0%)
+   • referral_letter_rid: 13751 (100.0%)
+   • referral_letter_content: 13751 (100.0%)
+
+--------------------------------------------------
+
+📊 Co-morbidities.csv
+   Records: 1,000
+   Columns: 8
+   Fields: comorbidity, comorbidity_id, patient_id, recorded_end_date, recorded_start_date, Condition_Category, ICD_10_Code, SNOMED_Code
+
+   DATASET DESCRIPTION:
+   • Patient medical conditions and comorbidities
+   • Includes ICD-10 and SNOMED codes for standardized classification
+   • Top condition categories: {'Cardiovascular disease': np.int64(391), 'Digestive disease': np.int64(227), 'Musculoskeletal disease': np.int64(210), 'Respiratory disease': np.int64(172)}
+
+OVERALL SUMMARY:
+Total records across all datasets: 755,465
+This appears to be a comprehensive healthcare dataset covering:
+• Patient demographics and registration
+• GP practices and healthcare facilities
+• Medical appointments and scheduling
+• Patient conditions and comorbidities
+• Healthcare professionals
+• Patient satisfaction surveys
+
+--------------------------------------------------
