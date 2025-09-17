@@ -1,31 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { ArrowLeft, Upload, Stethoscope } from 'lucide-react';
+import { MedicalData } from '@/types/triage';
 
 interface MedicalRequestFormProps {
-  onContinue?: () => void;
+  onContinue?: (data: MedicalData) => void;
   onBack?: () => void;
+  initialData?: MedicalData;
 }
 
-const MedicalRequestForm: React.FC<MedicalRequestFormProps> = ({ onContinue, onBack }) => {
-  const [formData, setFormData] = useState({
-    problem: '',
-    duration: '',
-    treatments: '',
-    concerns: '',
-    helpNeeded: '',
-    contactTimes: ''
-  });
+const MedicalRequestForm: React.FC<MedicalRequestFormProps> = ({ onContinue, onBack, initialData }) => {
+  const defaultData = {
+    problem: 'I have been sneezing frequently and have watery eyes. This mainly happens when I\'m outside, especially in the garden or park. I think it might be hay fever.',
+    duration: 'This has been going on for about 3 weeks now, since the weather got warmer. It seems to be getting slightly worse on sunny days.',
+    treatments: 'I tried taking some basic antihistamines from the supermarket which helped a little bit, but the symptoms come back after a few hours.',
+    concerns: 'I\'m worried this might affect my work presentations as I keep sneezing during meetings. Also concerned it might get worse during peak pollen season.',
+    helpNeeded: 'I would like advice on better treatment options and whether there are stronger medications that could help control my symptoms.',
+    contactTimes: 'Best to contact me after 5 PM on weekdays or any time at weekends.'
+  };
+
+  const data = initialData || defaultData;
+  const [formData, setFormData] = useState(data);
 
   const [characterCounts, setCharacterCounts] = useState({
-    problem: 500,
-    duration: 500,
-    treatments: 500,
-    concerns: 500,
-    helpNeeded: 500,
-    contactTimes: 500
+    problem: 500 - data.problem.length,
+    duration: 500 - data.duration.length,
+    treatments: 500 - data.treatments.length,
+    concerns: 500 - data.concerns.length,
+    helpNeeded: 500 - data.helpNeeded.length,
+    contactTimes: 500 - data.contactTimes.length
   });
+
+  // Update form fields when initialData changes
+  useEffect(() => {
+    if (initialData) {
+      setFormData(initialData);
+      setCharacterCounts({
+        problem: 500 - initialData.problem.length,
+        duration: 500 - initialData.duration.length,
+        treatments: 500 - initialData.treatments.length,
+        concerns: 500 - initialData.concerns.length,
+        helpNeeded: 500 - initialData.helpNeeded.length,
+        contactTimes: 500 - initialData.contactTimes.length
+      });
+    }
+  }, [initialData]);
 
   const handleTextChange = (field: keyof typeof formData, value: string) => {
     if (value.length <= 500) {
@@ -164,11 +184,23 @@ const MedicalRequestForm: React.FC<MedicalRequestFormProps> = ({ onContinue, onB
         </Button>
 
         <Button
-          onClick={onContinue}
+          onClick={() => {
+            if (onContinue && isFormValid) {
+              const medicalData: MedicalData = {
+                problem: formData.problem,
+                duration: formData.duration,
+                treatments: formData.treatments,
+                concerns: formData.concerns,
+                helpNeeded: formData.helpNeeded,
+                contactTimes: formData.contactTimes,
+              };
+              onContinue(medicalData);
+            }
+          }}
           disabled={!isFormValid}
           className={`px-8 py-3 rounded-xl shadow-lg transition-all duration-300 ${
-            isFormValid 
-              ? 'bg-blue-600 hover:bg-blue-700 text-white hover:shadow-xl' 
+            isFormValid
+              ? 'bg-blue-600 hover:bg-blue-700 text-white hover:shadow-xl'
               : 'bg-gray-300 text-gray-500 cursor-not-allowed'
           }`}
         >

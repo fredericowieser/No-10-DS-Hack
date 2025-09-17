@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import Literal
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, computed_field
 from dataclasses import dataclass
 
 @dataclass
@@ -32,6 +32,14 @@ class Patient(BaseModel):
     has_respiratory_disease: int = 0
     issue: str | None = None
     sex: Literal["male", "female"]
+    history: str | None = Field(default=None, description="Patient's medical history")
+
+    @computed_field
+    @property
+    def age(self) -> int:
+        """Calculate age from date of birth"""
+        today = datetime.now()
+        return today.year - self.date_of_birth.year - ((today.month, today.day) < (self.date_of_birth.month, self.date_of_birth.day))
 
     @property
     def comorbidities(self) -> list[str]:

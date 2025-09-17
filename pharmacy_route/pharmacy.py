@@ -5,8 +5,13 @@ import pandas as pd
 from typing import Callable, Literal
 from functools import partial
 from datetime import datetime
-from cancer_symptom_context import CANCER_SYMPTOMS_CONTEXT
-from patient import Patient
+from .cancer_symptom_context import CANCER_SYMPTOMS_CONTEXT
+import sys
+import os
+
+# Add parent directory to path to import Patient
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from modelling.patient import Patient
 
 def get_nearest_pharmacies(patient_id: str):
     df = pd.read_csv("datasets/patients_nearest_pharmacies.csv")
