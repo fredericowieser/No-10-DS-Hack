@@ -48,11 +48,11 @@ Built with React and TypeScript, the application provides:
 **Patient Portal:**
 - Medical request submission form
 - Preference selection (GP vs any available professional)
-- Emergency warning system
+- Emergency warning system for red flag symptoms
 
 **Clinician Portal:**
 - Patient triage dashboard with AI recommendations
-- Urgency-grouped patient lists
+- Urgency-grouped patient lists (Red, Amber, Green)
 - Detailed patient information and medical history
 - Call log management system
 
